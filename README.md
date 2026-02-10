@@ -88,5 +88,5 @@ By default, the skill produces:
 
 ## License
 
-No license file is included yet. If you want this to be truly open source, add a `LICENSE` (MIT / Apache-2.0 / etc.) based on your preference.
+MIT License - see [LICENSE](LICENSE) file for details.
 
