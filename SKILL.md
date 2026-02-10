@@ -3,7 +3,7 @@ name: elonmusk-repost
 description: Analyze Elon Musk's repost patterns on X and generate tweets optimized for getting reposted by @elonmusk. Use when users want to craft viral AI/tech product launches targeting Musk's attention.
 category: technique
 triggers: [musk, repost, retweet, viral tweet, x post, twitter, elonmusk]
-version: "1.1"
+version: "1.2"
 author: mingyouagi
 last_updated: 2026-02-10
 ---
@@ -14,32 +14,18 @@ Analyze what Elon Musk reposts on X and generate tweets optimized for his engage
 
 ## How to Use
 
-When invoked, follow this workflow:
+When invoked, **go straight to scoring and tweet generation in a single response**. Do NOT ask clarifying questions unless critical info is truly missing (no product name AND no description at all). Extract everything you can from the user's message — product name, what it does, media, metrics, draft text — and immediately produce the full output (score + tweets + strategy).
 
-1. **Check prerequisites** - Verify account readiness
-2. **Gather context** - Ask the user about their product/content
-3. **Analyze fit** - Score how well it matches Musk's repost patterns
-4. **Generate tweets** - Create optimized tweet drafts
-5. **Plan post-publish** - Give a follow-up playbook
+**Speed is critical.** The user expects one message in, one message out. Never split the analysis across multiple turns.
 
-## Prerequisites (Account-Level)
+### What to extract from the user's message:
+- Product/project name
+- What it does
+- Demo URL, video, or visual hook (if mentioned)
+- Any draft tweet text they've already written
+- Traction metrics (if mentioned)
 
-Before optimizing tweet content, confirm the basics:
-
-- Profile looks credible (real bio, avatar, some post history)
-- At least a few hundred organic followers
-- Account is not brand new (>30 days old)
-- No recent spam/suspension flags
-
-A zero-follower egg-avatar account will be ignored regardless of content quality.
-
-## Step 1: Gather Product/Content Info
-
-Ask the user:
-- What is the product/project name?
-- What does it do? (one sentence)
-- Is there a demo URL or video?
-- What's the visual hook? (screenshot, GIF, video)
+If the user provides a draft tweet, score THAT draft and generate improved variants.
 
 ## Step 2: Musk Repost Pattern Analysis
 
@@ -79,62 +65,19 @@ Repost Score = Σ match_score(i) / Σ weight(i) for ALL patterns × 100
 - Denominator uses ALL 15 patterns (sum of all weights = 108), so a perfect score requires hitting every pattern at 10/10.
 - In practice, 70+ is strong; 85+ is exceptional.
 
-### Successful Case Studies
+### Reference Scores (for calibration)
 
-**Lovart (AI Design Agent)** — Score: 81/100
-- AI Agent: 9/10 × 9 = 81 — End-to-end design agent
-- AI Visual Demo: 10/10 × 10 = 100 — Stunning design outputs
-- Underdog Origin: 8/10 × 7 = 56 — LiblibAI (China), unexpected entrant
-- Creator Tool: 8/10 × 7 = 56 — Agency-grade design for $90/mo
-- Speed/Scale: 7/10 × 6 = 42 — 20,000 queued on day 1, 800K users in 2 months
-- Wow Factor: 9/10 × 9 = 81 — "World's first Design Agent"
-- Anti-Establishment: 6/10 × 5 = 30 — Challenges Adobe/Canva
-- **Total: 446 / (7 matched patterns' max = 756) → normalized across all 15 → ~81/100**
+| Product | Score | Key Patterns Hit |
+|---------|-------|-----------------|
+| Lovart (AI Design Agent) | 81 | AI Visual Demo, AI Agent, Underdog, Creator Tool, Speed/Scale, Wow, Anti-Establishment |
+| Loopit (AI Game Gen) | 79 | Playable, AI Visual Demo, Underdog, Creator Tool, Wow, Grok Adjacent |
+| Midjourney | 78 | AI Visual Demo, Wow, Creator Tool, Anti-Establishment, Speed/Scale, Meme |
+| Suno (AI Music) | 76 | AI Visual Demo, Wow, Multimodal, Creator Tool, Playable, Meme |
+| Manus (AI Agent) | 74 | AI Agent, Underdog, Wow, Speed/Scale |
+| DeepSeek | 73 | Open-Source, Underdog, Anti-Establishment, Wow, Speed/Scale |
+| Cursor (AI Code Editor) | 72 | AI Agent, Wow, Creator Tool, Anti-Establishment, Speed/Scale, Grok Adjacent |
 
-**Midjourney** — Score: 78/100
-- AI Visual Demo: 10/10 × 10 = 100 — Iconic AI image generation
-- Wow Factor: 9/10 × 9 = 81 — Jaw-dropping visuals from text
-- Creator Tool: 9/10 × 7 = 63 — Anyone can create stunning art
-- Anti-Establishment: 7/10 × 5 = 35 — Challenges Adobe/stock photography
-- Speed/Scale: 8/10 × 6 = 48 — 16M+ users, organic growth
-- Meme Potential: 8/10 × 6 = 48 — Endless remixable output
-
-**Cursor (AI Code Editor)** — Score: 72/100
-- AI Agent: 8/10 × 9 = 72 — AI writes and edits code autonomously
-- Wow Factor: 8/10 × 9 = 72 — "It just wrote the whole feature"
-- Creator Tool: 9/10 × 7 = 63 — Turns anyone into a 10x developer
-- Anti-Establishment: 8/10 × 5 = 40 — Challenges VS Code / JetBrains
-- Speed/Scale: 7/10 × 6 = 42 — Explosive developer adoption
-- Grok/xAI Adjacent: 5/10 × 8 = 40 — Coding + AI intersection
-
-**Suno (AI Music)** — Score: 76/100
-- AI Visual Demo: 8/10 × 10 = 80 — Audio is the "visual"; instantly shareable
-- Wow Factor: 9/10 × 9 = 81 — Full songs from a text prompt
-- Video/Multimodal: 9/10 × 8 = 72 — Audio generation, cross-modal AI
-- Creator Tool: 9/10 × 7 = 63 — Anyone can make radio-quality music
-- Playable/Interactive: 8/10 × 8 = 64 — Try it instantly, share results
-- Meme Potential: 8/10 × 6 = 48 — Meme songs go viral
-
-**Loopit (AI Game Generator)** — Score: 79/100
-- Playable/Interactive: 9/10 × 8 = 72 — "Make everything playable"
-- AI Visual Demo: 9/10 × 10 = 90 — AI-generated mini-games
-- Underdog Origin: 8/10 × 7 = 56 — SeedLeap (China)
-- Creator Tool: 8/10 × 7 = 56 — Anyone can create games
-- Wow Factor: 9/10 × 9 = 81 — Instant game generation
-- Grok/xAI Adjacent: 6/10 × 8 = 48 — Aligns with Musk's AI gaming interest
-
-**DeepSeek** — Score: 73/100
-- Open-Source AI: 10/10 × 7 = 70 — Fully open-weight LLM
-- Underdog Origin: 9/10 × 7 = 63 — Chinese hedge fund → top-tier LLM
-- Anti-Establishment: 8/10 × 5 = 40 — Challenges OpenAI
-- Wow Factor: 9/10 × 9 = 81 — GPT-4 performance at a fraction of cost
-- Speed/Scale: 7/10 × 6 = 42 — Viral global adoption
-
-**Manus (AI Agent)** — Score: 74/100
-- AI Agent: 9/10 × 9 = 81 — General-purpose autonomous agent
-- Underdog Origin: 8/10 × 7 = 56 — Chinese team
-- Wow Factor: 9/10 × 9 = 81 — End-to-end autonomous task completion
-- Speed/Scale: 7/10 × 6 = 42 — Viral launch, invite-only hype
+Products scoring 70+ all share: strong visual demo OR autonomous agent + wow factor. Products below 50 typically lack visual impact.
 
 ### What Musk Ignores (Anti-Patterns)
 
@@ -268,14 +211,12 @@ This is often the **highest-conversion path** — you're already in his notifica
 
 ### Output Format
 
-For each generation, provide:
+Produce ALL of this in a **single response** — no follow-up turns:
 
-1. **Repost Score**: X/100 with per-pattern breakdown (show the math)
-2. **3 Tweet Variants**: Using different templates above
-3. **Recommended Media**: What visual to attach (format, length, content)
-4. **Posting Strategy**: Best time window, thread structure, follow-up plan
-5. **Risk Assessment**: What could prevent a repost
-6. **Improvement Suggestions**: How to increase the score
+1. **Repost Score**: X/100 with a compact table (pattern | relevance | score). Only show patterns scoring >0.
+2. **3 Tweet Variants**: Using different templates. Keep each tweet under 50 words.
+3. **Media + Timing**: What to attach and when to post (2-3 lines max).
+4. **How to Increase Score**: Top 3 actionable changes, with estimated score impact.
 
 ## Musk Engagement Style Reference
 
@@ -287,21 +228,15 @@ When Musk reposts or engages, his style is:
 
 Content that elicits these minimal-effort responses has the highest repost probability.
 
-## Step 4: Post-Publish Playbook
+## Post-Publish Playbook (include as a brief checklist)
 
-After posting, follow this sequence:
+- **0–5 min**: Self-reply with link + one extra detail
+- **5–30 min**: Engage with early replies
+- **30–60 min**: DM 3–5 mutual followers for amplification
+- **1–4 hours**: If no traction, reply to a relevant Musk tweet with the demo (Template E)
+- **Next window**: Repost with a different template at the next Prime time (10 PM–2 AM PT)
 
-1. **0–5 min**: Reply to your own tweet with link + one extra detail or metric
-2. **5–30 min**: Engage with early replies; like/retweet anyone who shares it
-3. **30–60 min**: DM or tag 3–5 relevant mutual followers to start organic amplification
-4. **1–4 hours**: If no traction, reply to a relevant Musk tweet with the same demo (Template E)
-5. **4–12 hours**: If still no traction, consider reposting at the next Prime timing window with a different template
-6. **Next day**: Analyze impressions; iterate on the hook or media if engagement was low
-
-**Do not**:
-- Delete and repost the same tweet repeatedly
-- Tag Musk in follow-up tweets if the first one didn't land
-- Spam the same content across multiple accounts
+Don't: beg-tag Musk, delete/repost repeatedly, or spam across accounts.
 
 ## Important Notes
 
